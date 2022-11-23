@@ -71,12 +71,12 @@ public class PlayerController : NetworkBehaviour
         if (context.performed)
         {
             _movementInput = context.ReadValue<Vector2>();
-            _particleManager.UpdateVariables_ClientRPC(_movementInput);
+            _particleManager.UpdateVariables(_movementInput);
         }
         if (context.canceled)
         {
             _movementInput = Vector2.zero;
-            _particleManager.UpdateVariables_ClientRPC(_movementInput);
+            _particleManager.UpdateVariables(_movementInput);
         }
     }
 

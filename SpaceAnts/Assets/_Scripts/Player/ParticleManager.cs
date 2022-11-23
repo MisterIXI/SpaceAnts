@@ -6,10 +6,10 @@ using Unity.Netcode;
 public class ParticleManager : NetworkBehaviour
 {
 
-    [HideInInspector] public float BackBoosterStrength;
-    [HideInInspector] public float FrontBoosterStrength;
-    [HideInInspector] public float LeftBoosterStrength;
-    [HideInInspector] public float RightBoosterStrength;
+    [HideInInspector] public NetworkVariable<float> BackBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [HideInInspector] public NetworkVariable<float> FrontBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [HideInInspector] public NetworkVariable<float> LeftBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [HideInInspector] public NetworkVariable<float> RightBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     [SerializeField] private ParticleSystem BackBooster;
     [SerializeField] private ParticleSystem FrontBooster;
@@ -23,10 +23,10 @@ public class ParticleManager : NetworkBehaviour
 
     private void Start()
     {
-        // BackBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        // FrontBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        // LeftBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        // RightBoosterStrength = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        
+        
+        
+        
         // get the current start speed of the particle system
         _backBoosterCurrentSpeed = BackBooster.main.startSpeed.constant;
         _frontBoosterCurrentSpeed = FrontBooster.main.startSpeed.constant;
@@ -34,41 +34,42 @@ public class ParticleManager : NetworkBehaviour
         _rightBoosterCurrentSpeed = RightBooster.main.startSpeed.constant;
     }
 
-    [ClientRpc]
-    public void UpdateVariables_ClientRPC(Vector2 vector)
+    public void UpdateVariables(Vector2 vector)
     {
         Debug.Log(OwnerClientId + ": " + vector);
         // if(!IsOwner)
         //     return;
+        if (!IsOwner)
+            return;
         if (vector.y < 0)
         {
-            BackBoosterStrength = Mathf.Abs(vector.y);
-            FrontBoosterStrength = 0;
+            BackBoosterStrength.Value = Mathf.Abs(vector.y);
+            FrontBoosterStrength.Value = 0;
         }
         else
         {
-            FrontBoosterStrength = vector.y;
-            BackBoosterStrength = 0;
+            FrontBoosterStrength.Value = vector.y;
+            BackBoosterStrength.Value = 0;
         }
         if (vector.x < 0)
         {
-            RightBoosterStrength = Mathf.Abs(vector.x);
-            LeftBoosterStrength = 0;
+            RightBoosterStrength.Value = Mathf.Abs(vector.x);
+            LeftBoosterStrength.Value = 0;
         }
         else
         {
-            LeftBoosterStrength = vector.x;
-            RightBoosterStrength = 0;
+            LeftBoosterStrength.Value = vector.x;
+            RightBoosterStrength.Value = 0;
         }
     }
     private void FixedUpdate()
     {
         // Debug.Log("ID: " + OwnerClientId + " BackBoosterStrength: " + BackBoosterStrength + " IsOwner: " + IsOwner);
         // lerp the particle system speed to the desired speed
-        _backBoosterCurrentSpeed = Mathf.Lerp(_backBoosterCurrentSpeed, BackBoosterStrength, 0.7f);
-        _frontBoosterCurrentSpeed = Mathf.Lerp(_frontBoosterCurrentSpeed, FrontBoosterStrength, 0.7f);
-        _leftBoosterCurrentSpeed = Mathf.Lerp(_leftBoosterCurrentSpeed, LeftBoosterStrength, 0.7f);
-        _rightBoosterCurrentSpeed = Mathf.Lerp(_rightBoosterCurrentSpeed, RightBoosterStrength, 0.7f);
+        _backBoosterCurrentSpeed = Mathf.Lerp(_backBoosterCurrentSpeed, BackBoosterStrength.Value, 0.7f);
+        _frontBoosterCurrentSpeed = Mathf.Lerp(_frontBoosterCurrentSpeed, FrontBoosterStrength.Value, 0.7f);
+        _leftBoosterCurrentSpeed = Mathf.Lerp(_leftBoosterCurrentSpeed, LeftBoosterStrength.Value, 0.7f);
+        _rightBoosterCurrentSpeed = Mathf.Lerp(_rightBoosterCurrentSpeed, RightBoosterStrength.Value, 0.7f);
 
         // set the particle system speed
         var main = BackBooster.main;
