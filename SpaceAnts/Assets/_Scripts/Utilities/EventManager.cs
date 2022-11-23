@@ -8,7 +8,10 @@ public class EventManager : MonoBehaviour
 {
     public static void SubscribeAction(string actionName, Action<InputAction.CallbackContext> action)
     {
-
+        InputAction inputAction = ReferenceManager.playerInput.actions.FindAction(actionName);
+        inputAction.started += action;
+        inputAction.performed += action;
+        inputAction.canceled += action;
     }
 
     private void test()
