@@ -17,7 +17,7 @@ public class TestBase : NetworkBehaviour
     [ServerRpc]
     public void AddScoreServerRpc(int amount)
     {
-        Debug.Log("ServerRpc called");
+        // Debug.Log("ServerRpc called");
         int newScore = (int)score.Value + amount;
         if(newScore < 0)
             newScore = 0;
