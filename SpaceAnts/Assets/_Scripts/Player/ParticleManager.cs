@@ -36,7 +36,7 @@ public class ParticleManager : NetworkBehaviour
 
     public void UpdateVariables(Vector2 vector)
     {
-        Debug.Log(OwnerClientId + ": " + vector);
+        // Debug.Log(OwnerClientId + ": " + vector);
         // if(!IsOwner)
         //     return;
         if (!IsOwner)

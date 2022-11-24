@@ -29,7 +29,7 @@ public class NetworkUI : MonoBehaviour
         hostBtn.onClick.AddListener(() =>
         {
             var utp = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-            utp.SetConnectionData(IPInput.text, ushort.Parse(PortInput.text));
+            utp.SetConnectionData("192.168.178.10", ushort.Parse(PortInput.text), "0.0.0.0");
             NetworkManager.Singleton.StartHost();
         });
     }

@@ -41,7 +41,10 @@ public class PlayerController : NetworkBehaviour
         // add movement force according to _movementInput.y
         _rb.AddForce(-transform.forward * _movementInput.y * _speed);
     }
-
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.CompareTag("HomeBase"))
+        other.gameObject.GetComponent<TestBase>().AddScoreServerRpc(1);
+    }
     // [ServerRpc]
     // private void UpdateBoosterVariables_ServerRPC()
     // {
