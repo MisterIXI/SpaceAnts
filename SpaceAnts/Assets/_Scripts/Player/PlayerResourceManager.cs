@@ -5,6 +5,8 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 public class PlayerResourceManager : NetworkBehaviour
 {
+    [SerializeField] private ParticleEmitter _crystalEmitter;
+    [SerializeField] private ParticleReceiver _crystalReceiver;
     public NetworkVariable<int> mineralAmount = new();
     public NetworkVariable<int> crystalAmount = new();
     public NetworkVariable<int> gasAmount = new();
@@ -18,12 +20,21 @@ public class PlayerResourceManager : NetworkBehaviour
         Debug.Log("Triggered");
         if (IsOwner)
         {
-            
+
             if (other.gameObject.CompareTag("HomeBase"))
             {
                 Debug.Log("HomeBase triggered");
                 DepositResource_ServerRPC();
             }
+        }
+        if (other.CompareTag("ResourcePoint"))
+        {
+            _crystalReceiver.SetSource(other.transform);
+            other.GetComponent<ResourcePoint>().Mine_ServerRPC(5);
+        }
+        else if (other.CompareTag("HomeBase"))
+        {
+            _crystalEmitter.SetTarget(other.transform);
         }
     }
 
@@ -43,6 +54,13 @@ public class PlayerResourceManager : NetworkBehaviour
     public void DepositEffect_ClientRPC(int mineralCount, int crystalCount, int gasCount)
     {
         // TODO: add particle effect
+        _crystalEmitter.EmitParticles(crystalCount);
+    }
+
+    [ClientRpc]
+    public void GatherEffect_ClientRPC(int mineralCount, int crystalCount, int gasCount)
+    {
+        _crystalReceiver.EmitParticles(crystalCount);
     }
 
     // Dicey CameraControl L186++
