@@ -32,5 +32,11 @@ public class NetworkUI : MonoBehaviour
             utp.SetConnectionData("192.168.178.10", ushort.Parse(PortInput.text), "0.0.0.0");
             NetworkManager.Singleton.StartHost();
         });
+        ReferenceManager.canvas = gameObject;
     }
+
+
+
+
+
 }

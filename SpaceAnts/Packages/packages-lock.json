@@ -263,6 +263,30 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.veriorpies.parrelsync": {
+      "version": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f45424822189ebd875d864a17d7f03b72eafbff7"
+    },
+    "jp.keijiro.noiseshader": {
+      "version": "2.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.com"
+    },
+    "jp.keijiro.shadergraphassets": {
+      "version": "2.5.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "12.1.0",
+        "jp.keijiro.noiseshader": "2.0.0"
+      },
+      "url": "https://registry.npmjs.com"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
