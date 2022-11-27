@@ -5,8 +5,12 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 public class PlayerResourceManager : NetworkBehaviour
 {
+    [SerializeField] private ParticleEmitter _mineralEmitter;
+    [SerializeField] private ParticleReceiver _mineralReceiver;
     [SerializeField] private ParticleEmitter _crystalEmitter;
     [SerializeField] private ParticleReceiver _crystalReceiver;
+    [SerializeField] private ParticleEmitter _gasEmitter;
+    [SerializeField] private ParticleReceiver _gasReceiver;
     [SerializeField] private int DigStrength = 5;
     public NetworkVariable<int> mineralAmount = new();
     public NetworkVariable<int> crystalAmount = new();
@@ -37,7 +41,9 @@ public class PlayerResourceManager : NetworkBehaviour
         }
         else if (other.CompareTag("HomeBase"))
         {
+            _mineralEmitter.SetTarget(other.transform);
             _crystalEmitter.SetTarget(other.transform);
+            _gasEmitter.SetTarget(other.transform);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -49,7 +55,9 @@ public class PlayerResourceManager : NetworkBehaviour
     }
     private void Mining_Start(Collider other)
     {
+        _mineralReceiver.SetSource(other.transform);
         _crystalReceiver.SetSource(other.transform);
+        _gasReceiver.SetSource(other.transform);
         if (IsOwner)
         {
             _lastCollectionTime = Time.time;
@@ -82,14 +90,17 @@ public class PlayerResourceManager : NetworkBehaviour
     [ClientRpc]
     public void DepositEffect_ClientRPC(int mineralCount, int crystalCount, int gasCount)
     {
-        // TODO: add particle effect
+        _mineralEmitter.EmitParticles(mineralCount);
         _crystalEmitter.EmitParticles(crystalCount);
+        _gasEmitter.EmitParticles(gasCount);
     }
 
     [ClientRpc]
     public void GatherEffect_ClientRPC(int mineralCount, int crystalCount, int gasCount)
     {
+        _mineralReceiver.EmitParticles(mineralCount);
         _crystalReceiver.EmitParticles(crystalCount);
+        _gasReceiver.EmitParticles(gasCount);
     }
 
     // Dicey CameraControl L186++

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mineral
-  m_Shader: {fileID: -6465566751694194690, guid: 82c183e8014868f40914f4258046460a, type: 3}
+  m_Name: AsteroidGas
+  m_Shader: {fileID: -6465566751694194690, guid: af611b1dd2dcc87438d4b9880a3522e1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -19,21 +19,30 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Float: 0.2
+    - _ColorMask: 15
+    - _Debug: 1
+    - _DeformationStrength: 100
+    - _Seed: 47.17
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Bounds: {r: 2, g: 3.79, b: 0.8, a: 0}
-    - _BoundsCenter: {r: -1.1, g: 0.93, b: 0.03, a: 0}
-    - _DebugCol: {r: 1, g: 0, b: 0.7996635, a: 0}
-    - _MaxColor: {r: 1, g: 0, b: 0.09570503, a: 0}
-    - _MinMax: {r: -2.16, g: 1.83, b: 0, a: 0}
+    - _Color: {r: 0.02180491, g: 0.09433961, b: 0.02180491, a: 1}
+    - _SeedPos: {r: 1, g: 2, b: 3, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8738388014380878332
+--- !u!114 &1058566391353274030
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

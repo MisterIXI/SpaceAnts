@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mineral
-  m_Shader: {fileID: -6465566751694194690, guid: 82c183e8014868f40914f4258046460a, type: 3}
+  m_Name: GasParticle
+  m_Shader: {fileID: -6465566751694194690, guid: 272c69c741bce59429f949eb17a0525d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -24,16 +24,14 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Float: 0.2
+    - _Debug: 0
+    - _DeformationStrength: 57
+    - _Seed: 42
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Bounds: {r: 2, g: 3.79, b: 0.8, a: 0}
-    - _BoundsCenter: {r: -1.1, g: 0.93, b: 0.03, a: 0}
-    - _DebugCol: {r: 1, g: 0, b: 0.7996635, a: 0}
-    - _MaxColor: {r: 1, g: 0, b: 0.09570503, a: 0}
-    - _MinMax: {r: -2.16, g: 1.83, b: 0, a: 0}
+    - _BaseColor: {r: 0, g: 0.993, b: 0, a: 0.3058824}
+    - _SeedPos: {r: 0.53, g: 2, b: 3, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8738388014380878332
+--- !u!114 &4767991600330271064
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

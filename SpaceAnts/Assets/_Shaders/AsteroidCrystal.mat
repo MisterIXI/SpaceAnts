@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Asteroid
+  m_Name: AsteroidCrystal
   m_Shader: {fileID: -6465566751694194690, guid: af611b1dd2dcc87438d4b9880a3522e1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -29,8 +29,8 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _ColorMask: 15
-    - _Debug: 0.15
-    - _DeformationStrength: 90
+    - _Debug: 1
+    - _DeformationStrength: 100
     - _Seed: 47.17
     - _Stencil: 0
     - _StencilComp: 8
@@ -39,7 +39,7 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.030838378, g: 0.038942296, b: 0.103773594, a: 1}
     - _SeedPos: {r: 1, g: 2, b: 3, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1058566391353274030
