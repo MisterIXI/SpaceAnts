@@ -11,6 +11,11 @@ public class PlayerController : NetworkBehaviour
     private Rigidbody _rb;
     private Vector2 _movementInput;
     private ParticleManager _particleManager;
+    private void Awake()
+    {
+        ReferenceManager.playerController = this;
+
+    }
     void Start()
     {
         if (!IsOwner)
@@ -19,11 +24,12 @@ public class PlayerController : NetworkBehaviour
             enabled = false;
         }
 
-        ReferenceManager.playerController = this;
-        ReferenceManager.PlayerSpawned();
         EventManager.SubscribeAction("Move", OnMove);
         _rb = GetComponent<Rigidbody>();
         _particleManager = GetComponent<ParticleManager>();
+
+        if (IsOwner)
+            ReferenceManager.PlayerSpawned();
     }
     private void FixedUpdate()
     {
@@ -41,34 +47,13 @@ public class PlayerController : NetworkBehaviour
         // add movement force according to _movementInput.y
         _rb.AddForce(-transform.forward * _movementInput.y * _speed);
     }
-    private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.CompareTag("HomeBase"))
-        other.gameObject.GetComponent<TestBase>().AddScoreServerRpc(1);
-    }
-    // [ServerRpc]
-    // private void UpdateBoosterVariables_ServerRPC()
+    // private void OnCollisionEnter(Collision other)
     // {
-    //     if (_movementInput.y < 0)
-    //     {
-    //         _particleManager.BackBoosterStrength.Value = Mathf.Abs(_movementInput.y);
-    //         _particleManager.FrontBoosterStrength.Value = 0;
-    //     }
-    //     else
-    //     {
-    //         _particleManager.FrontBoosterStrength.Value = _movementInput.y;
-    //         _particleManager.BackBoosterStrength.Value = 0;
-    //     }
-    //     if (_movementInput.x < 0)
-    //     {
-    //         _particleManager.RightBoosterStrength.Value = Mathf.Abs(_movementInput.x);
-    //         _particleManager.LeftBoosterStrength.Value = 0;
-    //     }
-    //     else
-    //     {
-    //         _particleManager.LeftBoosterStrength.Value = _movementInput.x;
-    //         _particleManager.RightBoosterStrength.Value = 0;
-    //     }
+    //     if (other.gameObject.CompareTag("HomeBase"))
+    //         other.gameObject.GetComponent<TestBase>().AddScoreServerRpc(1);
     // }
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
