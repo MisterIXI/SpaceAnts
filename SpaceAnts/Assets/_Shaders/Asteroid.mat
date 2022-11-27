@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_BrickTest
-  m_Shader: {fileID: -6465566751694194690, guid: a8f591f7ede4fa849bff797424590f3c, type: 3}
+  m_Name: Asteroid
+  m_Shader: {fileID: -6465566751694194690, guid: af611b1dd2dcc87438d4b9880a3522e1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -19,14 +19,30 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    m_Colors: []
+    - _ColorMask: 15
+    - _Debug: 0.146
+    - _DeformationStrength: 82.9
+    - _Seed: 47.17
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _SeedPos: {r: 1, g: 2, b: 3, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1889343681416963373
+--- !u!114 &1058566391353274030
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
