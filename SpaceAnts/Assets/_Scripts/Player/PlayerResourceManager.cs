@@ -49,9 +49,9 @@ public class PlayerResourceManager : NetworkBehaviour
     }
     private void Mining_Start(Collider other)
     {
+        _crystalReceiver.SetSource(other.transform);
         if (IsOwner)
         {
-            _crystalReceiver.SetSource(other.transform);
             _lastCollectionTime = Time.time;
         }
     }
