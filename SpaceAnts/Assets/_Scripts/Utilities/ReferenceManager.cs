@@ -8,6 +8,7 @@ public class ReferenceManager : MonoBehaviour
 {
     public static PlayerInput playerInput;
     public static PlayerController playerController;
+    public static HomeBase homeBase;
     public static event Action OnPlayerSpawned = delegate { };
     public static void PlayerSpawned() { OnPlayerSpawned.Invoke(); }
 

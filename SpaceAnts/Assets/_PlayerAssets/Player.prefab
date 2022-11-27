@@ -9836,6 +9836,7 @@ GameObject:
   - component: {fileID: 1521556697765415721}
   - component: {fileID: 1089536852275553259}
   - component: {fileID: 8331024316933376004}
+  - component: {fileID: 8158297365057733826}
   - component: {fileID: 1089536852275553258}
   m_Layer: 0
   m_Name: Player
@@ -9938,6 +9939,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _rotationSpeed: 0.5
+--- !u!114 &8158297365057733826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908441594196017407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d526e2f3c6de7f343bbf61b1bad459a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mineralAmount:
+    m_InternalValue: 0
+  crystalAmount:
+    m_InternalValue: 0
+  gasAmount:
+    m_InternalValue: 0
 --- !u!114 &1089536852275553258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14836,7 +14855,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ce20326e2dc6de44694df6d845d48562, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
