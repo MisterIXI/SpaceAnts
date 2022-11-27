@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class SpawnCollectables : MonoBehaviour
+public class SpawnCollectables : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private GameObject _gasPrefab;
+    [SerializeField] private GameObject _crystalPrefab;
+    [SerializeField] private GameObject _mineralPrefab;
+
+    [SerializeField] private int _gasCount;
+    private void Start()
     {
-        
+        if(IsOwner)
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
