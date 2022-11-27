@@ -7,10 +7,14 @@ public class PlayerResourceManager : NetworkBehaviour
 {
     [SerializeField] private ParticleEmitter _crystalEmitter;
     [SerializeField] private ParticleReceiver _crystalReceiver;
+    [SerializeField] private int DigStrength = 5;
     public NetworkVariable<int> mineralAmount = new();
     public NetworkVariable<int> crystalAmount = new();
     public NetworkVariable<int> gasAmount = new();
     private HomeBase _homeBase;
+
+    private float _lastCollectionTime;
+    private const float COLLECTION_COOLDOWN = 0.5f;
     private void Start()
     {
         _homeBase = ReferenceManager.homeBase;
@@ -29,13 +33,38 @@ public class PlayerResourceManager : NetworkBehaviour
         }
         if (other.CompareTag("ResourcePoint"))
         {
-            _crystalReceiver.SetSource(other.transform);
-            other.GetComponent<ResourcePoint>().Mine_ServerRPC(5);
+            Mining_Start(other);
         }
         else if (other.CompareTag("HomeBase"))
         {
             _crystalEmitter.SetTarget(other.transform);
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("ResourcePoint"))
+        {
+            Mining_Continue(other);
+        }
+    }
+    private void Mining_Start(Collider other)
+    {
+        if (IsOwner)
+        {
+            _crystalReceiver.SetSource(other.transform);
+            _lastCollectionTime = Time.time;
+        }
+    }
+
+    private void Mining_Continue(Collider other)
+    {
+        if (IsOwner && Time.time - _lastCollectionTime > COLLECTION_COOLDOWN)
+        {
+            _lastCollectionTime = Time.time;
+            ResourcePoint resourcePoint = other.GetComponent<ResourcePoint>();
+            resourcePoint.Mine_ServerRPC(DigStrength);
+        }
+
     }
 
     [ServerRpc]

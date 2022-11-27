@@ -61,7 +61,7 @@ public class ResourcePoint : NetworkBehaviour
         transform.localScale = new Vector3(scale, scale, scale);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void Mine_ServerRPC(int amount, ServerRpcParams serverRpcParams = default)
     {
         Debug.Log("Mining " + amount + " from " + resourceType + " with " + resourceAmount.Value + " remaining");
