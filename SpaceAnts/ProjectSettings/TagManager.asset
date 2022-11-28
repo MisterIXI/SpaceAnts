@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HomeBase
   - ResourcePoint
+  - BadRock
   layers:
   - Default
   - TransparentFX
