@@ -12,7 +12,7 @@ public class BadRockMovement : MonoBehaviour
     void Start()
     {
         mothership = GameObject.FindGameObjectWithTag("HomeBase");
-        finishTime = (Random.Range ( 0f, 1f))*50;
+        finishTime = (Random.Range ( 0.5f, 1f))*50;
         startPosition = gameObject.transform.position;
     }
 
