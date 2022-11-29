@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/robbiscene.unity
+    guid: cf8e2c6d571d5be45b32d1f5913a9f10
   m_configObjects: {}
