@@ -11,14 +11,16 @@ public class PlayerResourceManager : NetworkBehaviour
     [SerializeField] private ParticleReceiver _crystalReceiver;
     [SerializeField] private ParticleEmitter _gasEmitter;
     [SerializeField] private ParticleReceiver _gasReceiver;
-    [SerializeField] private int DigStrength = 5;
+    [SerializeField] private int DigStrength = 2;
     public NetworkVariable<int> mineralAmount = new();
     public NetworkVariable<int> crystalAmount = new();
     public NetworkVariable<int> gasAmount = new();
     private HomeBase _homeBase;
 
     private float _lastCollectionTime;
-    private const float COLLECTION_COOLDOWN = 0.5f;
+    private const float COLLECTION_COOLDOWN = 0.2f;
+    private float _lastDepositTime;
+    private const float DEPOSIT_COOLDOWN = 0.15f;
     private void Start()
     {
         _homeBase = ReferenceManager.homeBase;
@@ -31,8 +33,7 @@ public class PlayerResourceManager : NetworkBehaviour
 
             if (other.gameObject.CompareTag("HomeBase"))
             {
-                Debug.Log("HomeBase triggered");
-                DepositResource_ServerRPC();
+                Deposit_Start(other);
             }
         }
         if (other.CompareTag("ResourcePoint"))
@@ -46,13 +47,22 @@ public class PlayerResourceManager : NetworkBehaviour
             _gasEmitter.SetTarget(other.transform);
         }
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("ResourcePoint"))
         {
             Mining_Continue(other);
         }
+        if (IsOwner)
+        {
+            if (other.gameObject.CompareTag("HomeBase"))
+            {
+                Deposit_Continue(other);
+            }
+        }
     }
+
     private void Mining_Start(Collider other)
     {
         _mineralReceiver.SetSource(other.transform);
@@ -74,17 +84,35 @@ public class PlayerResourceManager : NetworkBehaviour
         }
 
     }
+    private void Deposit_Start(Collider other)
+    {
 
-    [ServerRpc]
+        if (IsOwner)
+        {
+            _lastDepositTime = Time.time;
+        }
+    }
+    private void Deposit_Continue(Collider other)
+    {
+        if (IsOwner && Time.time - _lastDepositTime > DEPOSIT_COOLDOWN)
+        {
+            _lastDepositTime = Time.time;
+            DepositResource_ServerRPC();
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
     public void DepositResource_ServerRPC()
     {
-        _homeBase.mineralAmount.Value += mineralAmount.Value;
-        _homeBase.crystalAmount.Value += crystalAmount.Value;
-        _homeBase.gasAmount.Value += gasAmount.Value;
-        DepositEffect_ClientRPC(mineralAmount.Value, crystalAmount.Value, gasAmount.Value);
-        mineralAmount.Value = 0;
-        crystalAmount.Value = 0;
-        gasAmount.Value = 0;
+        int mineralDelta = Mathf.Min(mineralAmount.Value, 10);
+        int crystalDelta = Mathf.Min(crystalAmount.Value, 10);
+        int gasDelta = Mathf.Min(gasAmount.Value, 10);
+        _homeBase.mineralAmount.Value += mineralDelta;
+        _homeBase.crystalAmount.Value += crystalDelta;
+        _homeBase.gasAmount.Value += gasDelta;
+        DepositEffect_ClientRPC(mineralDelta, crystalDelta, gasDelta);
+        mineralAmount.Value -= mineralDelta;
+        crystalAmount.Value -= crystalDelta;
+        gasAmount.Value -= gasDelta;
     }
 
     [ClientRpc]
