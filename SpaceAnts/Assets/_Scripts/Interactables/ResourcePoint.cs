@@ -36,18 +36,19 @@ public class ResourcePoint : NetworkBehaviour
         if (IsOwner)
         {
             int amount = 0;
-            switch (resourceType)
-            {
-                case ResourceType.Mineral:
-                    amount = Random.Range(100, 200);
-                    break;
-                case ResourceType.Crystal:
-                    amount = Random.Range(25, 50);
-                    break;
-                case ResourceType.Gas:
-                    amount = Random.Range(50, 100);
-                    break;
-            }
+            amount = Random.Range(50, 200);
+            // switch (resourceType)
+            // {
+            //     case ResourceType.Mineral:
+            //         amount = Random.Range(100, 200);
+            //         break;
+            //     case ResourceType.Crystal:
+            //         amount = Random.Range(25, 50);
+            //         break;
+            //     case ResourceType.Gas:
+            //         amount = Random.Range(50, 100);
+            //         break;
+            // }
             Debug.Log("Rolling for resource amount: " + amount);
             resourceAmount.Value = amount;
         }
