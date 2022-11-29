@@ -7,19 +7,19 @@ public class BadRockMovement : MonoBehaviour
     private GameObject mothership;
     private Vector3 startPosition; 
     private float finishTime;
-    private float delayTime;
+    private float elapsedTime;
     // Start is called before the first frame update
     void Start()
     {
-        mothership = GameObject.FindGameObjectWithTag("HomeBase");
-        finishTime = (Random.Range ( 0.5f, 1f))*50;
-        startPosition = gameObject.transform.position;
+        mothership = ReferenceManager.homeBase.gameObject;
+        finishTime = 10f;
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        delayTime += Time.deltaTime/ finishTime;
-        transform.position = Vector3.Lerp(startPosition,mothership.transform.position,delayTime);
+        elapsedTime += Time.deltaTime;
+        transform.position = Vector3.Lerp(mothership.transform.position,startPosition,elapsedTime/finishTime);
     }
 }
