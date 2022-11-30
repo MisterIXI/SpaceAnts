@@ -32,7 +32,7 @@ public class ResourcePoint : NetworkBehaviour
 
     private void OnSpawn()
     {
-        Debug.Log("ResourcePoint started and isOwner?:" + IsOwner + " isServer?:" + IsServer + " isClient?:" + IsClient);
+        // Debug.Log("ResourcePoint started and isOwner?:" + IsOwner + " isServer?:" + IsServer + " isClient?:" + IsClient);
         if (IsOwner)
         {
             int amount = 0;
@@ -49,7 +49,7 @@ public class ResourcePoint : NetworkBehaviour
             //         amount = Random.Range(50, 100);
             //         break;
             // }
-            Debug.Log("Rolling for resource amount: " + amount);
+            // Debug.Log("Rolling for resource amount: " + amount);
             resourceAmount.Value = amount;
         }
 
