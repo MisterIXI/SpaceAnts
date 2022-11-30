@@ -32,23 +32,24 @@ public class ResourcePoint : NetworkBehaviour
 
     private void OnSpawn()
     {
-        Debug.Log("ResourcePoint started and isOwner?:" + IsOwner + " isServer?:" + IsServer + " isClient?:" + IsClient);
+        // Debug.Log("ResourcePoint started and isOwner?:" + IsOwner + " isServer?:" + IsServer + " isClient?:" + IsClient);
         if (IsOwner)
         {
             int amount = 0;
-            switch (resourceType)
-            {
-                case ResourceType.Mineral:
-                    amount = Random.Range(100, 200);
-                    break;
-                case ResourceType.Crystal:
-                    amount = Random.Range(25, 50);
-                    break;
-                case ResourceType.Gas:
-                    amount = Random.Range(50, 100);
-                    break;
-            }
-            Debug.Log("Rolling for resource amount: " + amount);
+            amount = Random.Range(50, 200);
+            // switch (resourceType)
+            // {
+            //     case ResourceType.Mineral:
+            //         amount = Random.Range(100, 200);
+            //         break;
+            //     case ResourceType.Crystal:
+            //         amount = Random.Range(25, 50);
+            //         break;
+            //     case ResourceType.Gas:
+            //         amount = Random.Range(50, 100);
+            //         break;
+            // }
+            // Debug.Log("Rolling for resource amount: " + amount);
             resourceAmount.Value = amount;
         }
 
